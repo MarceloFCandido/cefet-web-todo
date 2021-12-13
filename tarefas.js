@@ -16,6 +16,18 @@ class Tarefa {
         this.categoria = categoria
         this.realizada = realizada
     }
+
+    seInsereNaPagina(containerEl) {
+        const item = document.createElement("li")
+
+        const classes = ["item-tarefa", `categoria-${this.categoria}`]
+        this.realizada ? classes.push("marcado") : null
+        item.classList.add(...classes)
+
+        item.innerHTML = this.nome
+
+        containerEl.appendChild(item)
+    }
 }
 
 const tarefas = [
@@ -23,4 +35,6 @@ const tarefas = [
     new Tarefa("Comprar ovos", "compras", true)
 ]
 
-console.log(tarefas)
+const lista = document.getElementById("lista-tarefas")
+lista.innerHTML = ""
+tarefas.forEach((tarefa) => tarefa.seInsereNaPagina(lista))
